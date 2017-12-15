@@ -1,0 +1,4 @@
+sqlalchemy
+praw
+pyyaml
+tqdm
