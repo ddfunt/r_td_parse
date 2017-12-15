@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlalchemy.orm import sessionmaker
 import yaml
 import tqdm
+import time
 
 APP_PARAMS_FILE = 'params.yaml'
 
@@ -62,8 +63,8 @@ def get_sub_author(comment, users):
         user.last_seen = datetime.now()
         return user
 
-def wait(time):
-    for _ in tqdm.trange(time):
+def wait(wait_time):
+    for _ in tqdm.trange(wait_time):
         time.sleep(1)
 
 def main_loop():
