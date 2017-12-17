@@ -7,6 +7,7 @@ import tqdm
 import time
 
 APP_PARAMS_FILE = 'params.yaml'
+WAIT_TIME = 900
 
 app_params = yaml.load(open(APP_PARAMS_FILE, 'r'))
 
@@ -102,8 +103,8 @@ def main_loop():
 
             session.commit()
 
-        print('Finished iteration, pausing 900sec, completed in {}s'.format(time.time() - start))
-        wait(900)
+        print('Finished iteration, pausing {}sec, completed in {}s'.format(WAIT_TIME, time.time() - start))
+        wait(WAIT_TIME)
 
 if __name__ == '__main__':
     main_loop()
