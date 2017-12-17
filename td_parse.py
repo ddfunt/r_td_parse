@@ -29,6 +29,8 @@ def get_comments(sub):
         if not type(comment) == praw.models.reddit.more.MoreComments:
             comm = Comment()
             comm.idx = comment.id
+            comm.score = comment.score
+            comm.creatd = comment.created
 
             yield comm, comment
 
@@ -89,6 +91,8 @@ def main_loop():
             for comment, raw_comment in get_comments(submission):
                 if comment not in comments:
                     user = get_author(raw_comment, users)
+                    #print(raw_comment.__dict__.keys())
+                    #input()
                     if user:
                         user.comment.append(comment)
                         session.add(user)

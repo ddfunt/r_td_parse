@@ -43,6 +43,8 @@ class Comment(Base):
     idx = Column(String)
     title = Column(String(250))
     user_id = Column(Integer, ForeignKey('user.id'))
+    score = Column(Integer)
+    created = Column(DateTime)
     #user = relationship("User" )
 
     def __repr__(self):
