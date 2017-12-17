@@ -15,3 +15,5 @@ x = [user for user in users if user.submissions > 0]
 print(len(x))
 for user in x:
     print(user)
+
+print(user)

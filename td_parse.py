@@ -84,10 +84,12 @@ def main_loop():
             posts = session.query(Post).all()
             if submission.id not in posts:
                 author = get_sub_author(submission, users)
-                session.add(author)
+                if author not in users:
+                    session.add(author)
                 post = Post()
                 post.idx = submission.id
                 post.title = submission.title
+                session.add(post)
             for comment, raw_comment in get_comments(submission):
                 if comment not in comments:
                     user = get_author(raw_comment, users)
