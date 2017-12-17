@@ -103,7 +103,7 @@ def main_loop():
             session.commit()
 
         print('Finished iteration, pausing 900sec, completed in {}s'.format(time.time() - start))
-        wait(600)
+        wait(900)
 
 if __name__ == '__main__':
     main_loop()

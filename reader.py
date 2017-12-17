@@ -16,4 +16,4 @@ print(len(x))
 for user in x:
     print(user)
 
-print(user)
+print(user.last_seen)
