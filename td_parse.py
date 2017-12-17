@@ -1,5 +1,5 @@
 import praw
-from DB.base import Base, engine, User, Comment
+from DB.base import Base, engine, User, Comment, Post
 from datetime import datetime
 from sqlalchemy.orm import sessionmaker
 import yaml
@@ -79,17 +79,24 @@ def main_loop():
 
             users = session.query(User).all()
             comments = session.query(Comment).all()
-            author = get_sub_author(submission, users)
+            posts = session.query(Post).all()
+            if submission.id not in posts:
+                author = get_sub_author(submission, users)
+                session.add(author)
+                post = Post()
+                post.idx = submission.id
+                post.title = submission.title
             for comment, raw_comment in get_comments(submission):
                 if comment not in comments:
                     user = get_author(raw_comment, users)
                     if user:
                         user.comment.append(comment)
                         session.add(user)
-            session.add(author)
+
+
             session.commit()
 
-        print('Finished iteration, pausing 600sec, completed in {}s'.format(time.time() - start))
+        print('Finished iteration, pausing 900sec, completed in {}s'.format(time.time() - start))
         wait(600)
 
 if __name__ == '__main__':

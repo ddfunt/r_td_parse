@@ -28,7 +28,7 @@ class User(Base):
 
 
     def __repr__(self):
-        return 'User({})'.format(self.name)
+        return 'User({}, {}, {})'.format(self.name, self.num_comments, self.submissions)
 
     def __eq__(self, other):
         if hasattr(other, 'name'):
@@ -47,6 +47,25 @@ class Comment(Base):
 
     def __repr__(self):
         return 'Comment({})'.format(self.name)
+
+    def __eq__(self, other):
+        if hasattr(other, 'idx'):
+            return self.idx == other.idx
+        else:
+            return self.idx == other
+
+class Post(Base):
+    __tablename__ = 'post'
+
+    id = Column(Integer, primary_key=True)
+    idx = Column(String)
+    title = Column(String(250))
+    user_id = Column(Integer, ForeignKey('user.id'))
+
+    # user = relationship("User" )
+
+    def __repr__(self):
+        return 'Post({})'.format(self.name)
 
     def __eq__(self, other):
         if hasattr(other, 'idx'):
